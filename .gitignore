@@ -1,0 +1,7 @@
+# Project exclude paths
+/consumer/block-block-feign/target/
+/consumer/block-user-feign/target/
+/eureka/target/
+/service/block-block/target/
+/service/block-common/target/
+/service/block-user/target/

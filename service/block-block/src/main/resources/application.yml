@@ -1,0 +1,33 @@
+server:
+  port: 8004
+
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: eureka-client-block-block
+#  datasource:
+#    url: jdbc:mysql://101.200.153.254:3306/block?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false
+#    username: root
+#    password: 94763zl
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    tomcat:
+#      max-active: 4
+#      min-idle: 2
+#      initial-size: 2
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8001/eureka/
+
+feign:
+  hystrix:
+    enabled: true
+
+#mybatis配置
+mybatis:
+  type-aliases-package: com.project.demo.DO
+  #  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml

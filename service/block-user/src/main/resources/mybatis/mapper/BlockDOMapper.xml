@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.demo.dao.BlockDOMapper">
+    <resultMap id="BaseResultMap" type="com.project.demo.DO.BlockDO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="author_id" jdbcType="BIGINT" property="authorId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="summary" jdbcType="VARCHAR" property="summary"/>
+        <result column="like_cnt" jdbcType="INTEGER" property="likeCnt"/>
+        <result column="type_id" jdbcType="INTEGER" property="typeId"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="authority" jdbcType="TINYINT" property="authority"/>
+        <result column="view_cnt" jdbcType="INTEGER" property="viewCnt"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.project.demo.DO.BlockDO">
+        <result column="text" jdbcType="LONGVARCHAR" property="text"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, author_id, title, summary, like_cnt, type_id, status, authority, view_cnt,post_date
+  </sql>
+    <sql id="Blob_Column_List">
+    text
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from block202003
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from block202003
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.project.demo.DO.BlockDO">
+    insert into block202003 (id, author_id, title, 
+      summary, like_cnt, type_id, 
+      status, authority, view_cnt, 
+      text)
+    values (#{id,jdbcType=BIGINT}, #{authorId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
+      #{summary,jdbcType=VARCHAR}, #{likeCnt,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, 
+      #{status,jdbcType=TINYINT}, #{authority,jdbcType=TINYINT}, #{viewCnt,jdbcType=INTEGER}, 
+      #{text,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.project.demo.DO.BlockDO">
+        insert into block202003
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="authorId != null">
+                author_id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="summary != null">
+                summary,
+            </if>
+            <if test="likeCnt != null">
+                like_cnt,
+            </if>
+            <if test="typeId != null">
+                type_id,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="authority != null">
+                authority,
+            </if>
+            <if test="viewCnt != null">
+                view_cnt,
+            </if>
+            <if test="text != null">
+                text,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="authorId != null">
+                #{authorId,jdbcType=BIGINT},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="summary != null">
+                #{summary,jdbcType=VARCHAR},
+            </if>
+            <if test="likeCnt != null">
+                #{likeCnt,jdbcType=INTEGER},
+            </if>
+            <if test="typeId != null">
+                #{typeId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="authority != null">
+                #{authority,jdbcType=TINYINT},
+            </if>
+            <if test="viewCnt != null">
+                #{viewCnt,jdbcType=INTEGER},
+            </if>
+            <if test="text != null">
+                #{text,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.project.demo.DO.BlockDO">
+        update block202003
+        <set>
+            <if test="authorId != null">
+                author_id = #{authorId,jdbcType=BIGINT},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="summary != null">
+                summary = #{summary,jdbcType=VARCHAR},
+            </if>
+            <if test="likeCnt != null">
+                like_cnt = #{likeCnt,jdbcType=INTEGER},
+            </if>
+            <if test="typeId != null">
+                type_id = #{typeId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="authority != null">
+                authority = #{authority,jdbcType=TINYINT},
+            </if>
+            <if test="viewCnt != null">
+                view_cnt = #{viewCnt,jdbcType=INTEGER},
+            </if>
+            <if test="text != null">
+                text = #{text,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.project.demo.DO.BlockDO">
+    update block202003
+    set author_id = #{authorId,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      like_cnt = #{likeCnt,jdbcType=INTEGER},
+      type_id = #{typeId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      authority = #{authority,jdbcType=TINYINT},
+      view_cnt = #{viewCnt,jdbcType=INTEGER},
+      text = #{text,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.project.demo.DO.BlockDO">
+    update block202003
+    set author_id = #{authorId,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      like_cnt = #{likeCnt,jdbcType=INTEGER},
+      type_id = #{typeId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      authority = #{authority,jdbcType=TINYINT},
+      view_cnt = #{viewCnt,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

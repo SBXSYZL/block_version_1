@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.demo.dao.ViewRecordDOMapper">
+    <resultMap id="BaseResultMap" type="com.project.demo.DO.ViewRecordDO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="view_time" jdbcType="TIMESTAMP" property="viewTime"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="block_id" jdbcType="BIGINT" property="blockId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, view_time, user_id, block_id,view_date
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from view_record202003
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from view_record202003
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.project.demo.DO.ViewRecordDO">
+    insert into view_record202003 (id, view_time, user_id, 
+      block_id)
+    values (#{id,jdbcType=BIGINT}, #{viewTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=BIGINT}, 
+      #{blockId,jdbcType=BIGINT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.project.demo.DO.ViewRecordDO">
+        insert into view_record202003
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="viewTime != null">
+                view_time,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="blockId != null">
+                block_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="viewTime != null">
+                #{viewTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="blockId != null">
+                #{blockId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.project.demo.DO.ViewRecordDO">
+        update view_record202003
+        <set>
+            <if test="viewTime != null">
+                view_time = #{viewTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="blockId != null">
+                block_id = #{blockId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.project.demo.DO.ViewRecordDO">
+    update view_record202003
+    set view_time = #{viewTime,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=BIGINT},
+      block_id = #{blockId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

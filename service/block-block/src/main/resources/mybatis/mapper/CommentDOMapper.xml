@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.demo.dao.CommentDOMapper">
+    <resultMap id="BaseResultMap" type="com.project.demo.DO.CommentDO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="author_id" jdbcType="BIGINT" property="authorId"/>
+        <result column="pre_user_id" jdbcType="BIGINT" property="preUserId"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.project.demo.DO.CommentDO">
+        <result column="text" jdbcType="LONGVARCHAR" property="text"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, author_id, pre_user_id,post_date
+  </sql>
+    <sql id="Blob_Column_List">
+    text
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from comment202003
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from comment202003
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.project.demo.DO.CommentDO">
+    insert into comment202003 (id, author_id, pre_user_id, 
+      text)
+    values (#{id,jdbcType=BIGINT}, #{authorId,jdbcType=BIGINT}, #{preUserId,jdbcType=BIGINT}, 
+      #{text,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.project.demo.DO.CommentDO">
+        insert into comment202003
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="authorId != null">
+                author_id,
+            </if>
+            <if test="preUserId != null">
+                pre_user_id,
+            </if>
+            <if test="text != null">
+                text,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="authorId != null">
+                #{authorId,jdbcType=BIGINT},
+            </if>
+            <if test="preUserId != null">
+                #{preUserId,jdbcType=BIGINT},
+            </if>
+            <if test="text != null">
+                #{text,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.project.demo.DO.CommentDO">
+        update comment202003
+        <set>
+            <if test="authorId != null">
+                author_id = #{authorId,jdbcType=BIGINT},
+            </if>
+            <if test="preUserId != null">
+                pre_user_id = #{preUserId,jdbcType=BIGINT},
+            </if>
+            <if test="text != null">
+                text = #{text,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.project.demo.DO.CommentDO">
+    update comment202003
+    set author_id = #{authorId,jdbcType=BIGINT},
+      pre_user_id = #{preUserId,jdbcType=BIGINT},
+      text = #{text,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.project.demo.DO.CommentDO">
+    update comment202003
+    set author_id = #{authorId,jdbcType=BIGINT},
+      pre_user_id = #{preUserId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
